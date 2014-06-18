@@ -130,7 +130,7 @@ public class TicTacToe extends JApplet {
 		allGameScroll.setBounds(AppletConfig.playersScrollX,
 				AppletConfig.playersScrollY, AppletConfig.playersScrollWidth,
 				AppletConfig.playersScrollHeight);
-
+		allGameScroll.setVerticalScrollBar(new MyScrollBar());
 		view.setLayout(new BoxLayout(view, BoxLayout.Y_AXIS));
 		view.setBounds(AppletConfig.playersScrollX,
 				AppletConfig.playersScrollY, AppletConfig.playersScrollWidth,
@@ -142,7 +142,7 @@ public class TicTacToe extends JApplet {
 		view.setBackground(AppletConfig.bgColor);
 		gamesScroll.setBackground(AppletConfig.bgColor);
 		gamesScroll.setBorder(null);
-
+		gamesScroll.setVerticalScrollBar(new MyScrollBar());
 		allGames.setMargin(new Insets(10, 10, 10, 10));
 		allGames.setBackground(AppletConfig.bgColor);
 		back.setBounds(AppletConfig.backX, AppletConfig.backY,
