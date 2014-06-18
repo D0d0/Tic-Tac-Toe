@@ -16,7 +16,6 @@ public class OnlineGames extends Thread {
 	private final String getOnlineGames = "GetOnlineGames";
 	private JSONParser parser = new JSONParser();
 	private URL obj;
-	private Game game;
 	private Map<String, int[]> games = new HashMap<>();
 
 	public OnlineGames(TicTacToe app) {

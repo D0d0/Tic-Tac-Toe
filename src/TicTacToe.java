@@ -263,13 +263,11 @@ public class TicTacToe extends JApplet {
 						String name = (String) o;
 						String win = Long.toString((Long) array.get(0));
 						String lost = Long.toString((Long) array.get(1));
-						String output = padRight(name, 15) + padRight(win, 1)
-								+ padLeft(lost, 3) + "\n"; /*
-															 * String.format(
-															 * "%1$15s %2$10s %3$4s\n"
-															 * , name, win,
-															 * lost);
-															 */
+						String output = (players.getText().equals("") ? ""
+								: "\n")
+								+ padRight(name, 15)
+								+ padRight(win, 1)
+								+ padLeft(lost, 3);
 						players.append(output);
 					}
 					game.setMode(Mode.ALL_PLAYERS);
@@ -451,7 +449,7 @@ public class TicTacToe extends JApplet {
 		bg.setColor(AppletConfig.bgColor);
 		bg.clearRect(0, 0, AppletConfig.width, AppletConfig.height);
 		bg.fillRect(0, 0, AppletConfig.width, AppletConfig.height);
-		bg.drawImage(logo, 27, 50, this);
+		bg.drawImage(logo, AppletConfig.left, AppletConfig.logoTop, this);
 		calculateXs();
 		switch (game.getMode()) {
 		case LOGIN:
@@ -485,6 +483,7 @@ public class TicTacToe extends JApplet {
 			playersScrool.getVerticalScrollBar().setValue(0);
 			back.repaint();
 			playersScrool.repaint();
+			playersScrool.doLayout();
 			bg.setColor(Color.black);
 			bg.drawString(trans.loggedUser() + game.getPlayerName(), 30,
 					AppletConfig.height - 20);
@@ -496,7 +495,7 @@ public class TicTacToe extends JApplet {
 			add(max);
 			add(size);
 			add(gameName);
-			//gameName.setText("");
+			// gameName.setText("");
 			// TODO: dokoncit toto
 			size.repaint();
 			max.repaint();
