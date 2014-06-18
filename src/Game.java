@@ -1,5 +1,7 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class Game {
 	private int[][] gameArea;
@@ -44,6 +46,8 @@ public class Game {
 		g.setColor(Color.white);
 		g.fillRect(left, AppletConfig.top, width, width);
 		g.setColor(Color.black);
+		Graphics2D g2d = (Graphics2D) g;
+		BasicStroke original_stroke = (BasicStroke) g2d.getStroke();
 		for (int i = 0; i <= size; i++) {
 			g.drawLine(left + i * size_of_field, AppletConfig.top, left + i
 					* size_of_field, bottom);
@@ -51,8 +55,20 @@ public class Game {
 					AppletConfig.top + i * size_of_field);
 			for (int j = 0; j < size; j++) {
 				if (i < size && gameArea[i][j] != 0) {
-					g.fillRect(left + i * size_of_field, AppletConfig.top + j
-							* size_of_field, size_of_field, size_of_field);
+					BasicStroke bs1 = new BasicStroke(8, BasicStroke.CAP_BUTT,
+							BasicStroke.JOIN_BEVEL);
+					g2d.setStroke(bs1);
+					g2d.setColor(AppletConfig.colors[gameArea[i][j]]);
+					g2d.drawLine(left + i * size_of_field + 10,
+							AppletConfig.top + j * size_of_field + 10, left
+									+ (i + 1) * size_of_field - 10,
+							AppletConfig.top + (j + 1) * size_of_field - 10);
+					g2d.drawLine(left + (i + 1) * size_of_field - 10,
+							AppletConfig.top + j * size_of_field + 10, left + i
+									* size_of_field + 10, AppletConfig.top
+									+ (j + 1) * size_of_field - 10);
+					g2d.setStroke(original_stroke);
+					g2d.setColor(Color.black);
 				}
 			}
 		}
