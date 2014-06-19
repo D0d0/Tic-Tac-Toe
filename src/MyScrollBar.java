@@ -11,7 +11,6 @@ public class MyScrollBar extends JScrollBar {
 
 	public MyScrollBar() {
 		super();
-		System.out.print("feo");
 	}
 
 	@Override

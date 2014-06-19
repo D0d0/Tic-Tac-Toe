@@ -28,7 +28,6 @@ public class WaitingForStart extends Thread {
 		while (true) {
 			try {
 				if (delete = waitForPlayers()) {
-					System.out.print("aj tu");
 					interrupt();
 				}
 				sleep(300);
@@ -80,8 +79,10 @@ public class WaitingForStart extends Thread {
 					}
 					return false;
 				case 2:
-					System.out.print("tu");
 					game.setMode(Mode.IN_GAME);
+					game.setRank(Long.valueOf((Long) jsonObject.get("rank"))
+							.intValue());
+					game.setMove(1);
 					game.initialize();
 					game.repaint();
 					return true;
@@ -91,7 +92,6 @@ public class WaitingForStart extends Thread {
 			game.repaint();
 			interrupt();
 		} catch (Exception e) {
-			System.out.print("padlo");
 		}
 		return false;
 	}

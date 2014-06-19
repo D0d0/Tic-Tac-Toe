@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 
 public class Game {
 	private int[][] gameArea;
-	private int size, playerID, maxPlayers, gameId, onlinePlayers;
+	private int size, playerID, maxPlayers, gameId, onlinePlayers, rank;
 	private TicTacToe app;
 	private Mode mode;
 	private String playerName, gameName;
@@ -15,6 +15,7 @@ public class Game {
 	private int size_of_field;
 	private int left;
 	private int width;
+	private Move moveC;
 
 	public Game(TicTacToe app) {
 		setApp(app);
@@ -79,13 +80,26 @@ public class Game {
 			y = ((y - AppletConfig.top) >= 0) ? (y - AppletConfig.top)
 					/ size_of_field : -1;
 			x = ((x - left) >= 0) ? (x - left) / size_of_field : -1;
-			if (x >= 0 && x < size && y >= 0 && y < size) {
-				// TODO: V ploche s indexami
-				System.out.println(x + " " + y);
-				gameArea[x][y] = 1;
-				app.repaint();
+			if (x >= 0 && x < size && y >= 0 && y < size && gameArea[x][y] == 0) {
+				moveC = new Move(rank, gameId);
+				String codedAre = codeArea();
+				if (moveC.can(codedAre)) {
+					moveC.changeMove();
+					gameArea[x][y] = rank;
+					moveC.updateArea(codedAre);
+				}
 			}
 		}
+	}
+
+	private String codeArea() {
+		String result = "";
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				result += gameArea[i][j] + " ";
+			}
+		}
+		return result.trim();
 	}
 
 	public Mode getMode() {
@@ -194,6 +208,18 @@ public class Game {
 	public void disconnect() {
 		waitingForStart.interrupt();
 		waitingForStart = null;
+	}
+
+	public void setMove(int move) {
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
+	@Override
+	public String toString() {
+		return "";
 	}
 
 }

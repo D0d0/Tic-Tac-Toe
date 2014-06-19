@@ -158,6 +158,8 @@ public class WaitingForPlayers extends Thread {
 			wr.flush();
 			wr.close();
 			con.getInputStream();
+			game.setMove(1);
+			game.setRank(1);
 		} catch (Exception e) {
 		}
 	}

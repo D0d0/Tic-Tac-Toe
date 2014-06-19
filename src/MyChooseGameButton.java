@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,8 +9,9 @@ public class MyChooseGameButton extends MyButton implements ActionListener {
 	private int id, max, size;
 	private Game game;
 	private TicTacToe app;
-	
-	public MyChooseGameButton(String label, int id, Game game, TicTacToe app, int max, int size) {
+
+	public MyChooseGameButton(String label, int id, Game game, TicTacToe app,
+			int max, int size) {
 		super(label);
 		this.id = id;
 		this.game = game;
@@ -26,6 +29,11 @@ public class MyChooseGameButton extends MyButton implements ActionListener {
 		game.connect(id);
 		game.setMode(Mode.WAITING_FOR_START);
 		app.repaint();
+	}
+
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 	}
 
 }

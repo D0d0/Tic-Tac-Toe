@@ -179,7 +179,7 @@ public class TicTacToe extends JApplet {
 		connectToGame.addActionListener(new ConnectGameL());
 		startGame.addActionListener(new StartGameToGameL());
 		addMouseListener(new MouseL());
-		// repaint();
+		repaint();
 		calculateXs();
 	}
 
