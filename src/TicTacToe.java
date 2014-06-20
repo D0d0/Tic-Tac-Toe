@@ -33,7 +33,7 @@ import org.json.simple.parser.ParseException;
 public class TicTacToe extends JApplet {
 
 	private static final long serialVersionUID = 1097471433365253670L;
-	private Translate trans = new TranslateSlovak();
+	private Translate trans = new TranslateEnglish();
 	private Image logo;
 	private JButton loginButton = new MyButton(trans.login());
 	private JButton registerButton = new MyButton(trans.register());
@@ -64,6 +64,7 @@ public class TicTacToe extends JApplet {
 	private int getNameS;
 	private int passwordS;
 	private int userS;
+	private int boardSizeS;
 
 	@Override
 	public void init() {
@@ -290,7 +291,6 @@ public class TicTacToe extends JApplet {
 					e1.printStackTrace();
 				}
 			}
-
 		}
 	}
 
@@ -514,8 +514,9 @@ public class TicTacToe extends JApplet {
 			bg.setColor(Color.black);
 			bg.drawString(trans.loggedUser() + game.getPlayerName(), 30,
 					AppletConfig.height - 20);
-			bg.drawString(trans.gameName(), getNameS, AppletConfig.sizeY);
+			bg.drawString(trans.boardSize(), boardSizeS, AppletConfig.sizeY);
 			bg.drawString(trans.maxPlayers(), maxPlayersS, AppletConfig.maxY);
+			bg.drawString(trans.gameName(), getNameS, AppletConfig.nameY);
 			break;
 		case CONNECT_TO_GAME:
 			// TODO: ked som klikol na pripojenie
@@ -561,6 +562,9 @@ public class TicTacToe extends JApplet {
 						frc).getWidth())) >> 1;
 		maxPlayersS = (AppletConfig.width - (int) (getFont().getStringBounds(
 				trans.maxPlayers(), frc).getWidth())) >> 1;
+
+		boardSizeS = (AppletConfig.width - (int) (getFont().getStringBounds(
+				trans.boardSize(), frc).getWidth())) >> 1;
 		getNameS = (AppletConfig.width - (int) (getFont().getStringBounds(
 				trans.gameName(), frc).getWidth())) >> 1;
 		passwordS = (AppletConfig.width - (int) (getFont().getStringBounds(

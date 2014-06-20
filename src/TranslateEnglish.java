@@ -1,20 +1,20 @@
-public class TranslateSlovak extends Translate {
-	private final String logo = "logo.png";
-	private final String loggedUser = "Prihl·sen˝ uûÌvateæ: ";
-	private final String user = "Meno";
-	private final String password = "Heslo";
-	private final String login = "Prihl·s";
-	private final String register = "Registruj";
-	private final String startGame = "Vytvoriù hru";
-	private final String createGame = "Vytvor hru";
-	private final String connectToGame = "Pripojiù sa k hre";
-	private final String showAllPlayers = "Zobraz vöetk˝ch hr·Ëov";
-	private final String backToMenu = "Sp‰ù do menu";
-	private final String gameName = "N·zov hry";
-	private final String maxPlayers = "Maxim·lny poËet hr·Ëov";
-	private final String numberOfConnected = "PoËet prihl·sen˝ch hr·Ëov: ";
-	private final String startGame1 = "Spusti hru";
-	private final String boardSize = "Veækosù plochy";
+public class TranslateEnglish extends Translate {
+	private final String logo = "logoen.png";
+	private final String loggedUser = "Logged user: ";
+	private final String user = "Name";
+	private final String password = "Password";
+	private final String login = "Sign in";
+	private final String register = "Sign up";
+	private final String startGame = "Create game";
+	private final String createGame = "Create game";
+	private final String connectToGame = "Connect to game";
+	private final String showAllPlayers = "Show all players";
+	private final String backToMenu = "Back to menu";
+	private final String gameName = "Game name";
+	private final String maxPlayers = "Max players";
+	private final String numberOfConnected = "Connected players: ";
+	private final String startGame1 = "Start game";
+	private final String boardSize = "Board size";
 
 	@Override
 	public String logo() {

@@ -4,7 +4,7 @@ final class AppletConfig {
 	static final String host = "http://davinci.fmph.uniba.sk:8080/~duc4/PiskvorkyServer/";
 	static final int width = 600;
 	static final int height = 700;
-	static final int logoTop = 30 ;
+	static final int logoTop = 30;
 	static final int logoLeft = 27;
 	static final int buttonsWidth = 150;
 	static final int buttonsHeight = 40;
@@ -41,6 +41,7 @@ final class AppletConfig {
 	static final int backY = height - buttonsHeight - 50;
 	static final Color[] colors = { Color.black, Color.blue, Color.red,
 			Color.yellow, Color.green, Color.orange, Color.pink };
+	static final int nameY = gameNameY - 10;
 	static final int maxY = textFieldUserY - 10;
 	static final int sizeY = textFieldPasswordY - 10;
 	static final int top = 170;

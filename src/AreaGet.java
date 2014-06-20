@@ -27,9 +27,7 @@ public class AreaGet extends Thread {
 
 	@Override
 	public void run() {
-		System.out.print("run");
 		while (true) {
-			System.out.print("v true");
 			try {
 				java.net.HttpURLConnection con = (java.net.HttpURLConnection) obj
 						.openConnection();
