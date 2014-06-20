@@ -16,6 +16,8 @@ public class Game {
 	private int left;
 	private int width;
 	private Move moveC;
+	private AreaGet getArea;
+	private String gamearea;
 
 	public Game(TicTacToe app) {
 		setApp(app);
@@ -39,6 +41,8 @@ public class Game {
 						(int) ((AppletConfig.width - 2 * AppletConfig.left) / size));
 		width = size_of_field * size;
 		left = (AppletConfig.width - width) / 2;
+		getArea = new AreaGet(this);
+		getArea.start();
 	}
 
 	public void drawGameArea(Graphics g) {
@@ -82,11 +86,11 @@ public class Game {
 			x = ((x - left) >= 0) ? (x - left) / size_of_field : -1;
 			if (x >= 0 && x < size && y >= 0 && y < size && gameArea[x][y] == 0) {
 				moveC = new Move(rank, gameId);
-				String codedAre = codeArea();
-				if (moveC.can(codedAre)) {
+				if (moveC.can(codeArea())) {
 					moveC.changeMove();
 					gameArea[x][y] = rank;
-					moveC.updateArea(codedAre);
+					gamearea = codeArea();
+					moveC.updateArea(gamearea);
 					app.repaint();
 				}
 			}
@@ -221,6 +225,29 @@ public class Game {
 	@Override
 	public String toString() {
 		return "";
+	}
+
+	/**
+	 * @return the gamearea
+	 */
+	public String getGamearea() {
+		return gamearea;
+	}
+
+	/**
+	 * @param gamearea
+	 *            the gamearea to set
+	 */
+	public void setGamearea(String gamearea) {
+		this.gamearea = gamearea;
+		String[] tmp = gamearea.split(" ");
+		int k = 0;
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				gameArea[i][j] = Integer.valueOf(tmp[k]);
+				k++;
+			}
+		}
 	}
 
 }

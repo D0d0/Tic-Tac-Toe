@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -179,8 +180,17 @@ public class TicTacToe extends JApplet {
 		connectToGame.addActionListener(new ConnectGameL());
 		startGame.addActionListener(new StartGameToGameL());
 		addMouseListener(new MouseL());
-		// repaint();
+		//
 		calculateXs();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					repaint();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
