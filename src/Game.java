@@ -87,6 +87,7 @@ public class Game {
 					moveC.changeMove();
 					gameArea[x][y] = rank;
 					moveC.updateArea(codedAre);
+					app.repaint();
 				}
 			}
 		}

@@ -179,7 +179,7 @@ public class TicTacToe extends JApplet {
 		connectToGame.addActionListener(new ConnectGameL());
 		startGame.addActionListener(new StartGameToGameL());
 		addMouseListener(new MouseL());
-		repaint();
+		// repaint();
 		calculateXs();
 	}
 
@@ -309,12 +309,9 @@ public class TicTacToe extends JApplet {
 						throw new Exception();
 					}
 					// TODO:tuto chujovinu errory
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				} catch (ParseException e1) {
-					e1.printStackTrace();
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					user.setBackground(Color.red);
+					password.setBackground(Color.red);
 				}
 			}
 		}
@@ -336,6 +333,8 @@ public class TicTacToe extends JApplet {
 					e1.printStackTrace();
 				}
 			}
+			user.setBackground(rqt.isResult() ? Color.green : Color.red);
+			password.setBackground(rqt.isResult() ? Color.green : Color.red);
 		}
 	}
 
