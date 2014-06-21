@@ -15,6 +15,7 @@ public class TranslateEnglish extends Translate {
 	private final String numberOfConnected = "Connected players: ";
 	private final String startGame1 = "Start game";
 	private final String boardSize = "Board size";
+	private final String rowsForWin = "Rows for win";
 
 	@Override
 	public String logo() {
@@ -92,7 +93,12 @@ public class TranslateEnglish extends Translate {
 	}
 
 	@Override
-	String boardSize() {
+	public String boardSize() {
 		return boardSize;
+	}
+
+	@Override
+	public String rowsForWin() {
+		return rowsForWin;
 	}
 }

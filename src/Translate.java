@@ -30,5 +30,6 @@ public abstract class Translate {
 	abstract String startGame1();
 
 	abstract String boardSize();
-
+	
+	abstract String rowsForWin();
 }

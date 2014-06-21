@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 
 public class Game {
 	private int[][] gameArea;
-	private int size, playerID, maxPlayers, gameId, onlinePlayers, rank;
+	private int size, playerID, maxPlayers, gameId, onlinePlayers, rank, rows;
 	private TicTacToe app;
 	private Mode mode;
 	private String playerName, gameName;
@@ -31,8 +31,10 @@ public class Game {
 	}
 
 	public void stopGettingOnlineGames() {
-		onlineGames.interrupt();
-		onlineGames = null;
+		if (onlineGames != null) {
+			onlineGames.interrupt();
+			onlineGames = null;
+		}
 	}
 
 	public void initialize() {
@@ -87,11 +89,16 @@ public class Game {
 			if (x >= 0 && x < size && y >= 0 && y < size && gameArea[x][y] == 0) {
 				moveC = new Move(rank, gameId);
 				if (moveC.can(codeArea())) {
-					moveC.changeMove();
 					gameArea[x][y] = rank;
 					gamearea = codeArea();
-					moveC.updateArea(gamearea);
 					app.repaint();
+					if (checkWin(rank)) {
+						getArea.interrupt();
+						getArea = null;
+						moveC.setWinner();
+					}
+					moveC.changeMove();
+					moveC.updateArea(gamearea);
 				}
 			}
 		}
@@ -170,8 +177,10 @@ public class Game {
 	}
 
 	public void stopWaiting() {
-		wait.interrupt();
-		wait = null;
+		if (wait != null) {
+			wait.interrupt();
+			wait = null;
+		}
 	}
 
 	public void createGame() {
@@ -211,8 +220,10 @@ public class Game {
 	}
 
 	public void disconnect() {
-		waitingForStart.interrupt();
-		waitingForStart = null;
+		if (waitingForStart != null) {
+			waitingForStart.interrupt();
+			waitingForStart = null;
+		}
 	}
 
 	public void setMove(int move) {
@@ -250,4 +261,48 @@ public class Game {
 		}
 	}
 
+	/**
+	 * @return the rows
+	 */
+	public int getRows() {
+		return rows;
+	}
+
+	/**
+	 * @param rows
+	 *            the rows to set
+	 */
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	private boolean scan(int[] what, int dx, int dy) {
+		if (gameArea == null)
+			return false;
+		for (int i = 0; i < gameArea.length; i++) {
+			if (gameArea[i] == null)
+				continue;
+			next: for (int j = 0; j < gameArea[i].length; j++) {
+				for (int k = 0; k < what.length; k++) {
+					int x = i + k * dx;
+					int y = j + k * dy;
+					if (x < 0 || x >= gameArea.length || gameArea[x] == null
+							|| y < 0 || y >= gameArea[x].length
+							|| gameArea[x][y] != what[k])
+						continue next;
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean checkWin(int rank) {
+		int[] what = new int[rows];
+		for (int i = 0; i < rows; i++) {
+			what[i] = rank;
+		}
+		return scan(what, 0, 1) || scan(what, 1, 0) || scan(what, 1, 1)
+				|| scan(what, 1, -1);
+	}
 }

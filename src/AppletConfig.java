@@ -26,6 +26,7 @@ final class AppletConfig {
 	static final int textFieldUserY = labelUserY + 10;
 	static final int labelPaswordY = textFieldUserY + 80;
 	static final int textFieldPasswordY = labelPaswordY + 10;
+	static final int rowY = textFieldPasswordY + 90;
 	static final int buttonsY = textFieldPasswordY + textFieldHeight + 45;
 	static final Color bgColor = new Color(
 			(int) (Math.random() * 256 + 10) % 255,
@@ -35,7 +36,7 @@ final class AppletConfig {
 	static final int playersScrollHeight = 400;
 	static final int playersScrollX = (width - playersScrollWidth) / 2;
 	static final int playersScrollY = 200;
-	static final int createGameY = 500;
+	static final int createGameY = rowY + 80;
 	static final int backWidth = 120;
 	static final int backX = width - buttonsWidth - 20;
 	static final int backY = height - buttonsHeight - 50;
@@ -44,6 +45,7 @@ final class AppletConfig {
 	static final int nameY = gameNameY - 10;
 	static final int maxY = textFieldUserY - 10;
 	static final int sizeY = textFieldPasswordY - 10;
+	static final int rowYlabel = rowY - 10;
 	static final int top = 170;
 	static final int left = 30;
 	static final int boardSize = width - left * 2;

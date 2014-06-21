@@ -29,6 +29,7 @@ public class AreaGet extends Thread {
 	public void run() {
 		while (true) {
 			try {
+				System.out.println("bezi area get");
 				java.net.HttpURLConnection con = (java.net.HttpURLConnection) obj
 						.openConnection();
 				con.setRequestMethod("POST");
@@ -49,15 +50,23 @@ public class AreaGet extends Thread {
 				}
 				Object obj1 = parser.parse(response.toString());
 				JSONObject jsonObject = (JSONObject) obj1;
+				int i = 0;
 				if ((boolean) jsonObject.get("result")
-						&& !jsonObject.get("area").toString()
-								.equals(game.getGamearea())) {
+						&& (!jsonObject.get("area").toString()
+								.equals(game.getGamearea()) || (i = Long
+								.valueOf((Long) jsonObject.get("winner"))
+								.intValue()) > 0)) {
 					game.setGamearea(jsonObject.get("area").toString());
+					if (i > 0) {
+						System.out.print("vyrhral " + i);
+						game.repaint();
+						return;
+					}
 					game.repaint();
 				}
-				sleep(200);
+				sleep(800);
 			} catch (Exception e) {
-				return;
+				break;
 			}
 		}
 	}

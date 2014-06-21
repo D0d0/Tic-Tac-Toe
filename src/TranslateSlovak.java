@@ -15,6 +15,7 @@ public class TranslateSlovak extends Translate {
 	private final String numberOfConnected = "Poèet prihlásenıch hráèov: ";
 	private final String startGame1 = "Spusti hru";
 	private final String boardSize = "Ve¾kos plochy";
+	private final String rowsForWin = "Políèok na vıhru";
 
 	@Override
 	public String logo() {
@@ -92,7 +93,12 @@ public class TranslateSlovak extends Translate {
 	}
 
 	@Override
-	String boardSize() {
+	public String boardSize() {
 		return boardSize;
+	}
+
+	@Override
+	public String rowsForWin() {
+		return rowsForWin;
 	}
 }

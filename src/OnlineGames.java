@@ -26,9 +26,11 @@ public class OnlineGames extends Thread {
 	public void run() {
 		while (true) {
 			try {
+				System.out.println("bezi get online");
 				getOnlineGames();
 				sleep(150);
 			} catch (InterruptedException e) {
+				return;
 			}
 		}
 	}
@@ -59,7 +61,6 @@ public class OnlineGames extends Thread {
 			JSONArray array = null;
 			int[] arr = new int[4];
 			if (games.keySet().equals(jsonObject.keySet())) {
-
 				for (Object o : new TreeSet<>(jsonObject.keySet())) {
 					array = (JSONArray) jsonObject.get(o);
 					if (Long.valueOf((Long) array.get(0)).intValue() != games

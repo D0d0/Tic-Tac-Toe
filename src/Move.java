@@ -10,6 +10,7 @@ public class Move {
 	private String canMove = "CanMove";
 	private String changeMove = "ChangeMove";
 	private String updateArea = "UpdateArea";
+	private String setWinner = "SetWinner";
 	private int rank, id;
 	private JSONParser parser = new JSONParser();
 	private URL obj;
@@ -80,6 +81,26 @@ public class Move {
 			con.setRequestProperty("User-Agent", "Mozilla/5.0");
 			con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 			String urlParameters = "id=" + id + "&area=" + newArea;
+			con.setDoOutput(true);
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.writeBytes(urlParameters);
+			wr.flush();
+			wr.close();
+			con.getInputStream();
+		} catch (Exception e) {
+		}
+	}
+
+	public void setWinner() {
+		try {
+			String url = AppletConfig.host + setWinner;
+			obj = new URL(url);
+			java.net.HttpURLConnection con = (java.net.HttpURLConnection) obj
+					.openConnection();
+			con.setRequestMethod("POST");
+			con.setRequestProperty("User-Agent", "Mozilla/5.0");
+			con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+			String urlParameters = "id=" + id + "&winner=" + rank;
 			con.setDoOutput(true);
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 			wr.writeBytes(urlParameters);

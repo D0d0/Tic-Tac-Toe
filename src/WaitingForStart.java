@@ -82,6 +82,8 @@ public class WaitingForStart extends Thread {
 					game.setMode(Mode.IN_GAME);
 					game.setRank(Long.valueOf((Long) jsonObject.get("rank"))
 							.intValue());
+					game.setRows((Long.valueOf((Long) jsonObject.get("rows"))
+							.intValue()));
 					game.setMove(1);
 					game.initialize();
 					game.repaint();

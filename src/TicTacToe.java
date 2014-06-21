@@ -47,6 +47,7 @@ public class TicTacToe extends JApplet {
 	private JTextField size = new JTextField();
 	private JTextField max = new JTextField();
 	private JTextField gameName = new JTextField();
+	private JTextField rows = new JTextField();
 	private JPasswordField password = new JPasswordField();
 	private JTextArea players = new JTextArea(5, 10);
 	private JScrollPane playersScrool = new JScrollPane(players);
@@ -65,6 +66,7 @@ public class TicTacToe extends JApplet {
 	private int passwordS;
 	private int userS;
 	private int boardSizeS;
+	private int rowsForWinS;
 
 	@Override
 	public void init() {
@@ -86,11 +88,13 @@ public class TicTacToe extends JApplet {
 		size.setHorizontalAlignment(JLabel.CENTER);
 		max.setHorizontalAlignment(JLabel.CENTER);
 		gameName.setHorizontalAlignment(JLabel.CENTER);
+		rows.setHorizontalAlignment(JLabel.CENTER);
 		user.setBorder(null);
 		password.setBorder(null);
 		size.setBorder(null);
 		max.setBorder(null);
 		gameName.setBorder(null);
+		rows.setBorder(null);
 		setBackground(AppletConfig.bgColor);
 		loginButton.setBounds(AppletConfig.loginButtonX, AppletConfig.buttonsY,
 				AppletConfig.buttonsWidth, AppletConfig.buttonsHeight);
@@ -111,6 +115,9 @@ public class TicTacToe extends JApplet {
 				AppletConfig.textFieldHeight);
 		gameName.setBounds(AppletConfig.textFieldX, AppletConfig.gameNameY,
 				AppletConfig.textFieldWidth, AppletConfig.textFieldHeight);
+		rows.setBounds(AppletConfig.textFieldX, AppletConfig.rowY,
+				AppletConfig.textFieldWidth, AppletConfig.textFieldHeight);
+		rows.setText("5");
 		startGameButton.setBounds(AppletConfig.menuButtonsX,
 				AppletConfig.startGameButtonY, AppletConfig.menuButtonsWidth,
 				AppletConfig.buttonsHeight);
@@ -154,22 +161,6 @@ public class TicTacToe extends JApplet {
 				AppletConfig.buttonsHeight);
 		setBackground(AppletConfig.bgColor);
 		setLayout(null);
-		add(loginButton);
-		add(registerButton);
-		add(startGameButton);
-		add(connectToGame);
-		add(showAllPlayers);
-		add(user);
-		add(password);
-		add(playersScrool);
-		add(gamesScroll);
-		add(createGame);
-		add(allGameScroll);
-		add(back);
-		add(max);
-		add(size);
-		add(gameName);
-		add(startGame);
 		setSize(AppletConfig.width, AppletConfig.height);
 		setVisible(true);
 		loginButton.addActionListener(new ButtonActionLoginL());
@@ -181,7 +172,6 @@ public class TicTacToe extends JApplet {
 		connectToGame.addActionListener(new ConnectGameL());
 		startGame.addActionListener(new StartGameToGameL());
 		addMouseListener(new MouseL());
-		//
 		calculateXs();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -194,9 +184,6 @@ public class TicTacToe extends JApplet {
 		});
 	}
 
-	/**
-	 * 
-	 */
 	public void empyView() {
 		view.removeAll();
 		view.repaint();
@@ -318,7 +305,6 @@ public class TicTacToe extends JApplet {
 					} else {
 						throw new Exception();
 					}
-					// TODO:tuto chujovinu errory
 				} catch (Exception e1) {
 					user.setBackground(Color.red);
 					password.setBackground(Color.red);
@@ -381,7 +367,7 @@ public class TicTacToe extends JApplet {
 				String s = size.getText();
 				int sizeInt = Integer.parseInt(s);
 				game.setSize(sizeInt);
-				if (sizeInt < 3 || sizeInt > 10) {
+				if (sizeInt < 4 || sizeInt > 10) {
 					throw new Exception();
 				}
 			} catch (Exception ex) {
@@ -398,6 +384,18 @@ public class TicTacToe extends JApplet {
 				error = true;
 				gameName.setBackground(Color.red);
 			}
+			try {
+				String rowsS = rows.getText();
+				int rowsInt = Integer.parseInt(rowsS);
+				game.setRows(rowsInt);
+				if (rowsInt < 3 || game.getSize() < rowsInt) {
+					throw new Exception();
+				}
+			} catch (Exception ex) {
+				error = true;
+				rows.setBackground(Color.red);
+			}
+
 			if (!error) {
 				game.setMode(Mode.WAITING_FOR_OTHERS);
 				game.setOnlinePlayers(1);
@@ -424,7 +422,6 @@ public class TicTacToe extends JApplet {
 			game.setMode(Mode.IN_GAME);
 			game.createGame();
 			game.stopWaiting();
-			// TODO: Kliknutie na spustenie hry
 			game.initialize();
 			repaint();
 		}
@@ -498,28 +495,28 @@ public class TicTacToe extends JApplet {
 					AppletConfig.height - 20);
 			break;
 		case CREATE_GAME:
-			// TODO: ked si vytvaram hru
 			add(createGame);
 			add(back);
 			add(max);
 			add(size);
 			add(gameName);
-			// gameName.setText("");
-			// TODO: dokoncit toto
+			add(rows);
 			size.repaint();
 			max.repaint();
 			back.repaint();
 			createGame.repaint();
 			gameName.repaint();
+			rows.repaint();
 			bg.setColor(Color.black);
 			bg.drawString(trans.loggedUser() + game.getPlayerName(), 30,
 					AppletConfig.height - 20);
 			bg.drawString(trans.boardSize(), boardSizeS, AppletConfig.sizeY);
 			bg.drawString(trans.maxPlayers(), maxPlayersS, AppletConfig.maxY);
 			bg.drawString(trans.gameName(), getNameS, AppletConfig.nameY);
+			bg.drawString(trans.rowsForWin(), rowsForWinS,
+					AppletConfig.rowYlabel);
 			break;
 		case CONNECT_TO_GAME:
-			// TODO: ked som klikol na pripojenie
 			add(back);
 			add(gamesScroll);
 			gamesScroll.repaint();
@@ -530,7 +527,6 @@ public class TicTacToe extends JApplet {
 			break;
 		case WAITING_FOR_START:
 		case WAITING_FOR_OTHERS:
-			// TODO: ked som klikol na vytvorenieh hry
 			add(back);
 			if (game.getMode() == Mode.WAITING_FOR_OTHERS) {
 				add(startGame);
@@ -571,6 +567,8 @@ public class TicTacToe extends JApplet {
 				trans.password(), frc).getWidth())) >> 1;
 		userS = (AppletConfig.width - (int) (getFont().getStringBounds(
 				trans.user(), frc).getWidth())) >> 1;
+		rowsForWinS = (AppletConfig.width - (int) (getFont().getStringBounds(
+				trans.rowsForWin(), frc).getWidth())) >> 1;
 	}
 
 }

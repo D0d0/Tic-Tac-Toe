@@ -28,6 +28,7 @@ public class WaitingForPlayers extends Thread {
 		}
 		while (true) {
 			try {
+				System.out.println("bezi wait for playes");
 				waitForPlayers();
 				sleep(300);
 			} catch (InterruptedException e) {
@@ -54,7 +55,7 @@ public class WaitingForPlayers extends Thread {
 			String urlParameters = "name=" + game.getGameName() + "&size="
 					+ game.getSize() + "&playerid=" + game.getPlayerID()
 					+ "&host=" + game.getPlayerName() + "&max="
-					+ game.getMaxPlayers();
+					+ game.getMaxPlayers() + "&rows=" + game.getRows();
 			con.setDoOutput(true);
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 			wr.writeBytes(urlParameters);
