@@ -28,6 +28,7 @@ public class MyChooseGameButton extends MyButton implements ActionListener {
 		game.setMaxPlayers(max);
 		game.connect(id);
 		game.setMode(Mode.WAITING_FOR_START);
+		game.stopGettingOnlineGames();
 		app.repaint();
 	}
 
