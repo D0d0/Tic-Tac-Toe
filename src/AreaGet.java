@@ -6,7 +6,11 @@ import java.net.URL;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
+/**
+ * 
+ * @author Jozef
+ *
+ */
 public class AreaGet extends Thread {
 
 	private Game game;
@@ -15,6 +19,10 @@ public class AreaGet extends Thread {
 	private URL obj;
 	private String urlParameters;
 
+	/**
+	 * Konstruktor triedy
+	 * @param game premenna s hrou
+	 */
 	public AreaGet(Game game) {
 		super();
 		this.game = game;
@@ -26,10 +34,13 @@ public class AreaGet extends Thread {
 	}
 
 	@Override
+	/**
+	 * Metoda, ktora ziskava aktualne informacie o hre zo servera
+	 */
 	public void run() {
 		while (true) {
 			try {
-				System.out.println("bezi area get");
+				//System.out.println("bezi area get");
 				java.net.HttpURLConnection con = (java.net.HttpURLConnection) obj
 						.openConnection();
 				con.setRequestMethod("POST");
@@ -58,7 +69,8 @@ public class AreaGet extends Thread {
 								.intValue()) > 0)) {
 					game.setGamearea(jsonObject.get("area").toString());
 					if (i > 0) {
-						System.out.print("vyrhral " + i);
+						game.setWinner(i);
+						game.checkWin(i);
 						game.repaint();
 						return;
 					}

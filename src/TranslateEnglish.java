@@ -1,3 +1,9 @@
+/**
+ * Anglicky preklad hry
+ * 
+ * @author Jozef
+ * 
+ */
 public class TranslateEnglish extends Translate {
 	private final String logo = "logoen.png";
 	private final String loggedUser = "Logged user: ";
@@ -16,6 +22,8 @@ public class TranslateEnglish extends Translate {
 	private final String startGame1 = "Start game";
 	private final String boardSize = "Board size";
 	private final String rowsForWin = "Rows for win";
+	private final String gamesList = "Games list";
+	private final String yourColor = "Your color";
 
 	@Override
 	public String logo() {
@@ -100,5 +108,15 @@ public class TranslateEnglish extends Translate {
 	@Override
 	public String rowsForWin() {
 		return rowsForWin;
+	}
+
+	@Override
+	public String gamesList() {
+		return gamesList;
+	}
+
+	@Override
+	String yourColor() {
+		return yourColor;
 	}
 }

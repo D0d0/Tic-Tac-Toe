@@ -6,6 +6,11 @@ import java.net.URL;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * 
+ * @author Jozef
+ * 
+ */
 public class Move {
 	private String canMove = "CanMove";
 	private String changeMove = "ChangeMove";
@@ -15,11 +20,26 @@ public class Move {
 	private JSONParser parser = new JSONParser();
 	private URL obj;
 
+	/**
+	 * Konstruktor pohybu
+	 * 
+	 * @param rank
+	 *            poradie hraca
+	 * @param id
+	 *            ID hry na serveri
+	 */
 	public Move(int rank, int id) {
 		this.rank = rank;
 		this.id = id;
 	}
 
+	/**
+	 * Zisti ci hrac moze polozit figurku
+	 * 
+	 * @param area
+	 *            plocha
+	 * @return moze, nemoze
+	 */
 	public boolean can(String area) {
 		try {
 			String url = AppletConfig.host + canMove;
@@ -51,6 +71,9 @@ public class Move {
 		return false;
 	}
 
+	/**
+	 * Ak polozil figuku, tak posunie pohyb na serveri
+	 */
 	public void changeMove() {
 		try {
 			String url = AppletConfig.host + changeMove;
@@ -71,6 +94,12 @@ public class Move {
 		}
 	}
 
+	/**
+	 * Aktualizuje plochu na serveri
+	 * 
+	 * @param newArea
+	 *            nova plocha
+	 */
 	public void updateArea(String newArea) {
 		try {
 			String url = AppletConfig.host + updateArea;
@@ -91,6 +120,9 @@ public class Move {
 		}
 	}
 
+	/**
+	 * Nastavi vitaza na serveri
+	 */
 	public void setWinner() {
 		try {
 			String url = AppletConfig.host + setWinner;

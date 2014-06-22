@@ -1,5 +1,10 @@
 import java.awt.Color;
 
+/**
+ * 
+ * @author Jozef
+ * 
+ */
 final class AppletConfig {
 	static final String host = "http://davinci.fmph.uniba.sk:8080/~duc4/PiskvorkyServer/";
 	static final int width = 600;
@@ -28,10 +33,14 @@ final class AppletConfig {
 	static final int textFieldPasswordY = labelPaswordY + 10;
 	static final int rowY = textFieldPasswordY + 90;
 	static final int buttonsY = textFieldPasswordY + textFieldHeight + 45;
-	static final Color bgColor = new Color(
-			(int) (Math.random() * 256 + 10) % 255,
-			(int) (Math.random() * 256 + 10) % 255,
-			(int) (Math.random() * 256 + 10) % 255);
+	static final Color bgColor = new Color(145, 222, 162/*
+														 * (int) (Math.random()
+														 * * 256 + 10) % 255,
+														 * (int) (Math.random()
+														 * * 256 + 10) % 255,
+														 * (int) (Math.random()
+														 * * 256 + 10) % 255
+														 */);
 	static final int playersScrollWidth = 300;
 	static final int playersScrollHeight = 400;
 	static final int playersScrollX = (width - playersScrollWidth) / 2;
@@ -46,8 +55,9 @@ final class AppletConfig {
 	static final int maxY = textFieldUserY - 10;
 	static final int sizeY = textFieldPasswordY - 10;
 	static final int rowYlabel = rowY - 10;
-	static final int top = 170;
+	static final int top = 160;
 	static final int left = 30;
 	static final int boardSize = width - left * 2;
+	static final int gameListY = 170;
 
 }

@@ -1,3 +1,9 @@
+/**
+ * Abstraktna trieda s prekladom hry
+ * 
+ * @author Jozef
+ * 
+ */
 public abstract class Translate {
 	abstract String logo();
 
@@ -30,6 +36,10 @@ public abstract class Translate {
 	abstract String startGame1();
 
 	abstract String boardSize();
-	
+
 	abstract String rowsForWin();
+
+	abstract String gamesList();
+
+	abstract String yourColor();
 }

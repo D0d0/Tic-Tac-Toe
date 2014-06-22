@@ -30,10 +30,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * 
+ * @author Jozef
+ * 
+ */
 public class TicTacToe extends JApplet {
 
 	private static final long serialVersionUID = 1097471433365253670L;
-	private Translate trans = new TranslateEnglish();
+	private Translate trans = new TranslateSlovak();
 	private Image logo;
 	private JButton loginButton = new MyButton(trans.login());
 	private JButton registerButton = new MyButton(trans.register());
@@ -67,9 +72,11 @@ public class TicTacToe extends JApplet {
 	private int userS;
 	private int boardSizeS;
 	private int rowsForWinS;
+	private int gamesListS;
 
 	@Override
 	public void init() {
+		System.out.print(AppletConfig.bgColor);
 		tracker = new MediaTracker(this);
 		logo = getImage(this.getCodeBase(), trans.logo());
 		tracker.addImage(logo, 0);
@@ -139,7 +146,6 @@ public class TicTacToe extends JApplet {
 		allGameScroll.setBounds(AppletConfig.playersScrollX,
 				AppletConfig.playersScrollY, AppletConfig.playersScrollWidth,
 				AppletConfig.playersScrollHeight);
-		allGameScroll.setVerticalScrollBar(new MyScrollBar());
 		view.setLayout(new BoxLayout(view, BoxLayout.Y_AXIS));
 		view.setBounds(AppletConfig.playersScrollX,
 				AppletConfig.playersScrollY, AppletConfig.playersScrollWidth,
@@ -151,7 +157,6 @@ public class TicTacToe extends JApplet {
 		view.setBackground(AppletConfig.bgColor);
 		gamesScroll.setBackground(AppletConfig.bgColor);
 		gamesScroll.setBorder(null);
-		gamesScroll.setVerticalScrollBar(new MyScrollBar());
 		allGames.setMargin(new Insets(10, 10, 10, 10));
 		allGames.setBackground(AppletConfig.bgColor);
 		back.setBounds(AppletConfig.backX, AppletConfig.backY,
@@ -184,17 +189,35 @@ public class TicTacToe extends JApplet {
 		});
 	}
 
+	/**
+	 * Vymaze pripojitelne hry
+	 */
 	public void empyView() {
 		view.removeAll();
 		view.repaint();
 	}
 
+	/**
+	 * Prida button s pripojitelnou hrou
+	 * 
+	 * @param s
+	 *            label buttonu
+	 * @param id
+	 *            ID hry
+	 * @param max
+	 *            max hracov v hre
+	 * @param size
+	 *            velkost plochy
+	 */
 	public void addButton(String s, int id, int max, int size) {
 		JButton butt = new MyChooseGameButton(s, id, game, this, max, size);
 		butt.setAlignmentX(Component.CENTER_ALIGNMENT);
 		view.add(butt);
 	}
 
+	/**
+	 * Preklesli buttony s vyberom hry
+	 */
 	public void refreshGames() {
 		validate();
 		invalidate();
@@ -419,13 +442,14 @@ public class TicTacToe extends JApplet {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			game.setMode(Mode.IN_GAME);
-			game.createGame();
-			game.stopWaiting();
-			game.initialize();
-			repaint();
+			if (game.getOnlinePlayers() > 1) {
+				game.setMode(Mode.IN_GAME);
+				game.createGame();
+				game.stopWaiting();
+				game.initialize();
+				repaint();
+			}
 		}
-
 	}
 
 	@Override
@@ -475,10 +499,10 @@ public class TicTacToe extends JApplet {
 		case MENU:
 			add(startGameButton);
 			add(connectToGame);
-			add(showAllPlayers);
+			// add(showAllPlayers);
 			startGameButton.repaint();
 			connectToGame.repaint();
-			showAllPlayers.repaint();
+			// showAllPlayers.repaint();
 			bg.setColor(Color.black);
 			bg.drawString(trans.loggedUser() + game.getPlayerName(), 30,
 					AppletConfig.height - 20);
@@ -522,6 +546,7 @@ public class TicTacToe extends JApplet {
 			gamesScroll.repaint();
 			back.repaint();
 			bg.setColor(Color.black);
+			bg.drawString(trans.gamesList(), gamesListS, AppletConfig.gameListY);
 			bg.drawString(trans.loggedUser() + game.getPlayerName(), 30,
 					AppletConfig.height - 20);
 			break;
@@ -540,10 +565,16 @@ public class TicTacToe extends JApplet {
 					onlinePlayersS, AppletConfig.maxY);
 			break;
 		case IN_GAME:
+			if (game.getWinner() > 0) {
+				add(back);
+				back.repaint();
+				bg.setColor(Color.black);
+				bg.drawString(game.getRank() == game.getWinner() ? "Vyhral si"
+						: "Prehral si", 250, AppletConfig.height - 20);
+			}
 			game.drawGameArea(bg);
-			bg.setColor(Color.black);
-			bg.drawString(trans.loggedUser() + game.getPlayerName(), 30,
-					AppletConfig.height - 20);
+			bg.setColor(AppletConfig.colors[game.getRank()]);
+			bg.drawString(trans.yourColor(), 30, AppletConfig.height - 20);
 			break;
 		default:
 			break;
@@ -558,7 +589,8 @@ public class TicTacToe extends JApplet {
 						frc).getWidth())) >> 1;
 		maxPlayersS = (AppletConfig.width - (int) (getFont().getStringBounds(
 				trans.maxPlayers(), frc).getWidth())) >> 1;
-
+		gamesListS = (AppletConfig.width - (int) (getFont().getStringBounds(
+				trans.gamesList(), frc).getWidth())) >> 1;
 		boardSizeS = (AppletConfig.width - (int) (getFont().getStringBounds(
 				trans.boardSize(), frc).getWidth())) >> 1;
 		getNameS = (AppletConfig.width - (int) (getFont().getStringBounds(
@@ -570,5 +602,4 @@ public class TicTacToe extends JApplet {
 		rowsForWinS = (AppletConfig.width - (int) (getFont().getStringBounds(
 				trans.rowsForWin(), frc).getWidth())) >> 1;
 	}
-
 }

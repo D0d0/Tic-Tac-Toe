@@ -9,8 +9,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * 
+ * @author Jozef
+ * 
+ */
 public class Request extends Thread {
-	
+
 	private final String hostCreatePlayer = "CreatePlayer";
 	private final String hostLogin = "Login";
 	private final String allPlayers = "AllPlayers";
@@ -20,6 +25,9 @@ public class Request extends Thread {
 	private String resultString;
 	private TypeRequest typeRequest;
 
+	/**
+	 * Konstruktor
+	 */
 	public Request() {
 		super();
 	}
@@ -127,13 +135,13 @@ public class Request extends Thread {
 		synchronized (this) {
 			switch (typeRequest) {
 			case REGISTER:
-				setResult(register());
+				result = register();
 				break;
 			case LOGIN:
-				setResultString(login());
+				resultString = login();
 				break;
 			case GETPLAYERS:
-				setResultString(getPlayers());
+				resultString = getPlayers();
 				break;
 			default:
 				break;
@@ -142,44 +150,52 @@ public class Request extends Thread {
 		}
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
+	/**
+	 * Nastavi heslo
+	 * 
+	 * @param password
+	 *            nove heslo
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public String getname() {
-		return name;
-	}
-
+	/**
+	 * Nastavi meno hraca
+	 * 
+	 * @param name
+	 *            nove meno
+	 */
 	public void setname(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Vrati result requestu
+	 * 
+	 * @return boolean
+	 */
 	public boolean isResult() {
 		return result;
 	}
 
-	public void setResult(boolean result) {
-		this.result = result;
-	}
-
-	public TypeRequest getTypeRequest() {
-		return typeRequest;
-	}
-
+	/**
+	 * Nastavi typ requestu
+	 * 
+	 * @param typeRequest
+	 *            novy typ
+	 */
 	public void setTypeRequest(TypeRequest typeRequest) {
 		this.typeRequest = typeRequest;
 	}
 
+	/**
+	 * Vrati vysledok requestu ako string
+	 * 
+	 * @return vysledok
+	 */
 	public String getResultString() {
 		return resultString;
-	}
-
-	public void setResultString(String resultString) {
-		this.resultString = resultString;
 	}
 
 }

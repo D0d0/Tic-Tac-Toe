@@ -1,3 +1,9 @@
+/**
+ * Slovensky preklad hry
+ * 
+ * @author Jozef
+ * 
+ */
 public class TranslateSlovak extends Translate {
 	private final String logo = "logo.png";
 	private final String loggedUser = "Prihl·sen˝ uûÌvateæ: ";
@@ -16,6 +22,8 @@ public class TranslateSlovak extends Translate {
 	private final String startGame1 = "Spusti hru";
 	private final String boardSize = "Veækosù plochy";
 	private final String rowsForWin = "PolÌËok na v˝hru";
+	private final String gamesList = "Zoznam hier";
+	private final String yourColor = "Tvoja farba";
 
 	@Override
 	public String logo() {
@@ -100,5 +108,15 @@ public class TranslateSlovak extends Translate {
 	@Override
 	public String rowsForWin() {
 		return rowsForWin;
+	}
+
+	@Override
+	public String gamesList() {
+		return gamesList;
+	}
+
+	@Override
+	public String yourColor() {
+		return yourColor;
 	}
 }

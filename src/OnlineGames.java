@@ -10,6 +10,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * 
+ * @author Jozef
+ * 
+ */
 public class OnlineGames extends Thread {
 
 	private TicTacToe app;
@@ -18,6 +23,12 @@ public class OnlineGames extends Thread {
 	private URL obj;
 	private Map<String, int[]> games = new HashMap<>();
 
+	/**
+	 * Konstruktor hry
+	 * 
+	 * @param app
+	 *            applet
+	 */
 	public OnlineGames(TicTacToe app) {
 		this.app = app;
 	}
@@ -26,7 +37,7 @@ public class OnlineGames extends Thread {
 	public void run() {
 		while (true) {
 			try {
-				System.out.println("bezi get online");
+				// System.out.println("bezi get online");
 				getOnlineGames();
 				sleep(150);
 			} catch (InterruptedException e) {

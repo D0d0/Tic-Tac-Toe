@@ -6,6 +6,11 @@ import java.net.URL;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * 
+ * @author Jozef
+ * 
+ */
 public class WaitingForStart extends Thread {
 
 	private Game game;
@@ -84,7 +89,6 @@ public class WaitingForStart extends Thread {
 							.intValue());
 					game.setRows((Long.valueOf((Long) jsonObject.get("rows"))
 							.intValue()));
-					game.setMove(1);
 					game.initialize();
 					game.repaint();
 					return true;

@@ -6,6 +6,11 @@ import java.net.URL;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * 
+ * @author Jozef
+ * 
+ */
 public class WaitingForPlayers extends Thread {
 
 	private final String createGame = "CreateGame";
@@ -28,7 +33,7 @@ public class WaitingForPlayers extends Thread {
 		}
 		while (true) {
 			try {
-				System.out.println("bezi wait for playes");
+				// System.out.println("bezi wait for playes");
 				waitForPlayers();
 				sleep(300);
 			} catch (InterruptedException e) {
@@ -159,12 +164,18 @@ public class WaitingForPlayers extends Thread {
 			wr.flush();
 			wr.close();
 			con.getInputStream();
-			game.setMove(1);
 			game.setRank(1);
+			game.repaint();
 		} catch (Exception e) {
 		}
 	}
 
+	/**
+	 * Nastavi vymazanie hry na serveri
+	 * 
+	 * @param delete
+	 *            true ak sa maze na serveri
+	 */
 	public void setDelete(boolean delete) {
 		this.delete = delete;
 	}
